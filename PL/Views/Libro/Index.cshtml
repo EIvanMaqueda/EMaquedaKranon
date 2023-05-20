@@ -1,0 +1,90 @@
+﻿@model ML.Autor
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/book.css" />
+<div class="row" style="margin-left: 2%; ">
+	<h1>Libros</h1>
+    <div class="col-3">
+    <div class="mb-3">
+        <label for="lblAutores" class="form-label">Busqueda Por autores</label>
+        <div class="input-group mb-2">
+				@Html.DropDownListFor(model=>model.Autores, new SelectList(Model.Autores,"Nombre","Nombre"),"Autores", new{@class="form-control",@id="lblAutores"})
+				<a class="btn btn-success" onclick="DropdownList()">Buscar</a>
+        </div>
+    </div>
+    </div>
+
+    <div class="col-3">
+        <div class="mb-3">
+            <label for="lblAutores" class="form-label">Busqueda Por Titulo</label>
+            <div class="input-group mb-2">
+                <input type="text" placeholder="titulo del libro" class="form-control" id="txttitulo"></input>
+				<a class="btn btn-success" onclick="Titulo()">Buscar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <a class="btn btn-success" style=" margin-top: 10.5%;">Agregar Nuevo Libro</a>
+    </div>
+</div>
+<div class="row" style="margin-top: 4%; ">
+	@foreach (ML.Libro libro in Model.Libros)
+	{
+		<div class="col-3" style="margin-left: 4%; margin-top: 4%;">
+			<figure class='book'>
+
+				<!-- Front -->
+
+				<ul class='hardcover_front'>
+					<li>
+						<div class="coverDesign yellow">
+							<span class="ribbon">NEW</span>
+							<h1>@libro.Titulo</h1>
+							<p style="margin-bottom: 100px;">@libro.AñoPublicacion</p>
+						</div>
+					</li>
+					<li></li>
+				</ul>
+
+				<!-- Pages -->
+
+				<ul class='page'>
+					<li></li>
+					<li>
+						<a class="btnBook ancla" href="#">Clic aqui para mas informacion</a>
+					</li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+
+				<!-- Back -->
+
+				<ul class='hardcover_back'>
+					<li></li>
+					<li></li>
+				</ul>
+				<ul class='book_spine'>
+					<li></li>
+					<li></li>
+				</ul>
+				<figcaption>
+					<h1>@libro.Titulo</h1>
+					<span>By @libro.Autor.Nombre</span>
+					<p>Editorial: @libro.Editorial<br/>
+					   Año: @libro.AñoPublicacion
+					</p>
+				</figcaption>
+			</figure>
+		</div>
+	}
+	
+</div>
+@section Scripts{
+    <script src="~/js/modernizr.custom.js"></script>
+    <script src="~/js/funciones.js"></script>
+	
+}
